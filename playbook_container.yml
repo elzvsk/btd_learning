@@ -1,0 +1,17 @@
+---
+  - name: docker-container
+    hosts: all
+    remote_user: psapp
+    become: yes
+    tasks:
+      - name: docker-image
+        docker_image:
+          name: rabbitmq
+          
+      - name: start container
+        docker_container:
+          name: rabbitmq
+          image: rabbitmq:latest
+          restart: no
+          state: started
+          command: sleep 1d    
